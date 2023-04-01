@@ -12,7 +12,11 @@ module.exports = {
       'my-lime': '#7AA802',
       'my-green': '#293800',
       'my-white': '#ffffff',
-      'my-lightgreen': '#F3F8E7'
+      'my-lightgreen': '#F3F8E7',
+      'nav-grey': '#F0F0F0',
+      'nav-orange': '#ff8300',
+      'nav-Darkgrey': '#53565A',
+      'my-black': '#000000',
     },
     fontFamily: {
       'Inter': "Inter"

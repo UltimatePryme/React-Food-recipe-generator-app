@@ -1,21 +1,21 @@
 import React from 'react'
 import { useState } from 'react';
 import { useEffect } from 'react';
-import Randombg from './assets/Randombg.jpg'
+import Veganbg from './assets/Veganbg.jpg'
 import parse from 'html-react-parser'
 
 
-function Random() {
-        const [randomList, setRandomList] = useState([])
+function Vegan() {
+        const [VeganList, setVeganList] = useState([])
         
         useEffect(() => {
-            getRandom();
+            getVegan();
         }, [])
 
-        const getRandom = async() => {
-            const api = await fetch(`https://api.spoonacular.com/recipes/random?apiKey=c422330075c64e6bb8e232b82312270a&number=24`);
+        const getVegan = async() => {
+            const api = await fetch(`https://api.spoonacular.com/recipes/random?apiKey=c422330075c64e6bb8e232b82312270a&number=24&tags=vegetarian`);
             const apiData = await api.json();
-                setRandomList(apiData.recipes)
+                setVeganList(apiData.recipes)
                 console.log(apiData.recipes)
         }
 
@@ -24,15 +24,23 @@ function Random() {
     <main className='bg-my-lightgreen grid grid-cols-1 justify-center'>
         <section className=''>
             <div  className=' bg-gradient-to-t from-my-green  w-full h-[26rem] relative'>
-                <img src={Randombg} alt="hero section" className='w-full h-[26rem] object-cover absolute  mix-blend-multiply' />
+                <img src={Veganbg} alt="hero section" className='w-full h-[26rem] object-cover absolute  mix-blend-multiply' />
                 <div className='flex items-center justify-center'>
-                    <h1 className='absolute mb-16 bottom-5 left-0 right-0 z-2 font-Inter font-black md:text-4xl lg:text-4xl xl:text-6xl text-center text-my-lightgreen'>New meals generated <br/> at random for all diets!</h1>
+                    <h1 className='absolute mb-16 bottom-5 left-0 right-0 z-2 font-Inter font-black md:text-4xl lg:text-4xl xl:text-6xl text-center text-my-lightgreen'>Meals curated for <br/> vegetarians and lacto ovo vegetarians</h1>
                 </div>
             </div>
         </section>
         <section  className='px-32 pb-10 w-full h-3/6 grid sm:grid-cols-1 md:grid-cols-1 lg:grid-cols-2 xl:grid-cols-2 2xl:grid-cols-3 gap-1 z-0 justify-center'>
+            
+        {VeganList.map((recipe) => {
+                return(                    
+                    <div className='bg-my-white w-[28rem] h-[29rem] mt-10 rounded-2xl cursor-pointer hover:shadow-xl hidden'  key={recipe.id}>
+                        <p>{parse(recipe.instructions)}</p>
+                    </div>
+                )
+            })}
 
-            {randomList.map((recipe) => {
+            {VeganList.map((recipe) => {
                 return(                    
                     <div className='bg-my-white w-[28rem] h-[29rem] mt-10 rounded-2xl cursor-pointer hover:shadow-xl'  key={recipe.id}>
                         <div className=' relative flex flex-col items-center justify-center pt-10'>
@@ -53,4 +61,4 @@ function Random() {
   )
 }
 
-export default Random
+export default Vegan
